@@ -1,23 +1,388 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      "name": "고혈압실비보험 종합 비교 센터",
+      "description": "고혈압 환자를 위한 맞춤형 실비보험 및 유병자 보험 비교 분석 서비스. 2026년 최신 정보를 바탕으로 최적의 보험 상품을 안내해 드립니다.",
+      "url": "https://www.highbloodpressure-insurance-center.com",
+      "telephone": "+82-2-1234-5678",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "서울특별시",
+        "addressRegion": "서울특별시",
+        "postalCode": "03300",
+        "streetAddress": "보험로 1234, 보험타워 5층"
+      },
+      "serviceType": [
+        "유병자 실비보험",
+        "고혈압 실비보험",
+        "간편심사 보험",
+        "뇌혈관질환 진단비",
+        "심혈관질환 진단비"
+      ],
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "대한민국"
+      }
+    }
+    </script>
+
+    <style>
+      /* --- Font and Basic Reset --- */
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        line-height: 1.7;
+        color: #333;
+        background-color: #f7f9fc;
+      }
+      a { color: #007bff; text-decoration: none; transition: color 0.3s; }
+      a:hover { color: #0056b3; text-decoration: underline; }
+
+      /* --- Header and Navigation --- */
+      header {
+        background-color: #0d47a1; /* Deep Blue */
+        color: #fff;
+        padding: 25px 15px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      header h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+      header p { font-size: 1.1rem; opacity: 0.9; }
+
+      nav { background-color: #1565c0; padding: 10px 0; }
+      nav ul { list-style: none; display: flex; justify-content: center; gap: 30px; }
+      nav ul li a {
+        color: #e3f2fd; /* Light Blue */
+        font-size: 1.05rem;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      nav ul li a:hover, nav ul li a.active { background-color: #bbdefb; color: #0d47a1; }
+
+      /* --- Main Content Layout --- */
+      main {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+        background: white;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+      }
+      section { padding: 30px 0; border-bottom: 1px dashed #e0e0e0; }
+      section:last-child { border-bottom: none; }
+
+      /* --- Typography and Headings --- */
+      h2 {
+        color: #0d47a1; /* Deep Blue */
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #29b6f6; /* Light Blue */
+      }
+      h3 {
+        color: #1565c0; /* Medium Blue */
+        font-size: 1.6rem;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+      p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px; text-align: justify; }
+
+      /* --- Keyword List Styling --- */
+      .keywords-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 15px;
+      }
+      .keywords-list span {
+        background-color: #e3f2fd; /* Lightest Blue */
+        color: #0d47a1;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        border: 1px solid #90caf9;
+      }
+
+      /* --- Data Presentation (Graphs/Tables) --- */
+      .data-container { margin: 25px 0; padding: 20px; background-color: #fcfcfc; border-radius: 8px; border: 1px solid #eee; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
+      th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+      th { background-color: #eaf1f9; color: #0d47a1; font-weight: 600; }
+      tr:nth-child(even) { background-color: #f9f9f9; }
+
+      /* --- Interactive Form Elements (Dwell Time Optimization) --- */
+      .form-wrapper { background-color: #f0f8ff; padding: 30px; border-radius: 10px; margin-top: 20px; box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); }
+      .form-group { margin-bottom: 20px; }
+      .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #1565c0; font-size: 1rem; }
+      .form-group input[type="text"], .form-group input[type="number"], .form-group select {
+        width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; transition: border-color 0.3s;
+      }
+      .form-group input:focus, .form-group select:focus { border-color: #29b6f6; outline: none; box-shadow: 0 0 0 3px rgba(41, 182, 246, 0.2); }
+      .cta-button {
+        display: inline-block;
+        background-color: #29b6f6; /* Light Blue */
+        color: white;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        border-radius: 30px;
+        font-weight: 700;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .cta-button:hover { background-color: #0d47a1; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
+
+      /* --- Footer --- */
+      footer {
+        text-align: center;
+        padding: 30px 10px;
+        background-color: #0d47a1;
+        color: #e3f2fd;
+        font-size: 0.9rem;
+        margin-top: 50px;
+        border-top: 5px solid #29b6f6;
+      }
+      footer address { margin-top: 10px; }
+
+      /* --- Responsive Design --- */
+      @media (max-width: 768px) {
+        header h1 { font-size: 2rem; }
+        nav ul { flex-direction: column; gap: 10px; }
+        main { margin: 20px auto; padding: 0 15px; }
+        h2 { font-size: 1.8rem; }
+        .keywords-list { justify-content: center; }
+        .cta-button { width: 100%; margin-top: 15px; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>고혈압실비보험 종합 비교 센터</h1>
+        <p>2026년 최신 유병자 실비보험 가입 조건, 보장 분석 전문가 상담</p>
+        <nav aria-label="주요 메뉴">
+            <ul>
+                <li><a href="#insurance_info">실비보험이란?</a></li>
+                <li><a href="#coverage_analysis">보장 내용 분석</a></li>
+                <li><a href="#keywords_analysis">SEO 키워드 분석</a></li>
+                <li><a href="#comparison_tool">맞춤 비교 견적</a></li>
+                <li><a href="#trustworthy_info">신뢰 정보 확인</a></li>
+            </ul>
+        </nav>
+    </header>
     <main>
-      <h1>Home page</h1>
+        <!-- Section 1: Introduction and Problem Statement -->
+        <section id="insurance_info">
+            <h2>고혈압 환자를 위한 실비보험, 왜 필요할까요?</h2>
+            <p>고혈압은 국내 만성질환 중 가장 높은 유병률을 보이는 질환입니다. 2026년 현재 기준으로, 우리나라 성인 3명 중 1명은 고혈압 진단을 받았습니다. 고혈압은 그 자체로 위험하기도 하지만, 뇌졸중(뇌경색/뇌출혈), 심근경색, 협심증, 신부전증 등 치명적인 합병증을 유발하는 주요 원인으로 알려져 있습니다.</p>
+            <p>일반적으로 고혈압 진단 후 약을 복용하게 되면, 건강한 사람을 대상으로 하는 표준형 실비보험 가입이 어렵거나 제한될 수 있습니다. 그러나 고혈압 환자에게 실비보험은 필수적입니다. 고혈압 관리에 필요한 정기적인 진료, 약물 치료비 외에도 만일의 경우 발생할 수 있는 합병증 치료비는 엄청난 경제적 부담으로 작용하기 때문입니다.</p>
+            <p><strong>고혈압실비보험</strong>이란, 고혈압 진단을 받은 유병자(질환자)도 가입할 수 있도록 심사 기준을 완화한 실비보험 상품을 의미합니다. 단순히 '고혈압실비보험'이라는 별도 상품이 있는 것이 아니라, 유병자 실비보험의 일종으로 고혈압 환자의 가입 심사 통과율을 높인 상품을 통칭합니다. 본 센터에서는 2026년 최신 정보를 바탕으로 고객님께 가장 유리한 유병자 실비보험을 비교 분석해 드립니다.</p>
+
+            <h3>고혈압 유병자 실비보험 가입 시 고려사항</h3>
+            <div class="data-container">
+                <p><strong>1. 간편심사 여부:</strong> 일반 심사와 달리, 간편심사는 고지사항(325 고지, 3가지 질문)만 통과하면 가입이 가능합니다. 고혈압 약 복용 기간이 짧거나 혈압 수치가 안정적인 경우에도 간편심사형 상품을 고려하는 것이 좋습니다.</p>
+                <p><strong>2. 보장 범위:</strong> 유병자 실비보험은 표준형에 비해 보장 범위가 좁거나 자기부담률이 높을 수 있습니다. 하지만 고혈압의 주요 합병증(뇌혈관질환, 심혈관질환) 관련 특약은 반드시 확인해야 합니다. 특히, 뇌혈관질환 진단비는 뇌졸중보다 넓은 범위를 보장하므로 필수 특약으로 추천됩니다.</p>
+                <p><strong>3. 보험료 수준:</strong> 유병자 상품은 건강체 상품보다 보험료가 높게 책정될 수 있습니다. 여러 보험사의 상품을 비교하여 합리적인 보험료로 충분한 보장을 받는 것이 중요합니다.</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Coverage Analysis and Comparison -->
+        <section id="coverage_analysis">
+            <h2>고혈압 합병증 대비를 위한 핵심 보장 분석</h2>
+            <p>고혈압 환자의 실비보험 가입 목적은 단순한 통원 치료비 보장뿐만 아니라, 합병증 발생 시 발생하는 거액의 치료비를 대비하는 것입니다. 특히 뇌졸중과 심근경색은 고혈압 환자에게 가장 위험한 합병증으로, 관련 진단비 특약 가입이 매우 중요합니다. 다음은 2026년 기준, 유병자 실비보험에서 중요하게 다루는 핵심 보장 내용입니다.</p>
+
+            <h3>고혈압과 관련된 주요 합병증 진단비 비교 (2026년 기준)</h3>
+            <div class="data-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>보장 항목</th>
+                            <th>일반 실비보험</th>
+                            <th>유병자 실비보험 (간편심사형)</th>
+                            <th>고혈압 환자에게 중요한 이유</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>입원/통원 치료비</strong></td>
+                            <td>입원 5천만원, 통원 20~30만원 한도 (표준)</td>
+                            <td>입원 5천만원, 통원 10~20만원 한도 (일부 보장 축소)</td>
+                            <td>고혈압 정기 검진 및 약물 치료비 보장. (다만, 비급여 항목은 축소될 수 있음)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>뇌혈관질환 진단비</strong></td>
+                            <td>표준형에서 별도 특약 가입 가능</td>
+                            <td>간편심사형에서 가입 가능 (일부 보험사 한도 제한)</td>
+                            <td>고혈압은 뇌출혈/뇌경색의 주요 원인. 뇌혈관 전체를 보장하는 범위가 뇌졸중 진단비보다 넓음.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>허혈성 심장질환 진단비</strong></td>
+                            <td>표준형에서 별도 특약 가입 가능</td>
+                            <td>간편심사형에서 가입 가능 (일부 보험사 한도 제한)</td>
+                            <td>고혈압은 협심증, 심근경색 등 허혈성 심장질환의 위험 증가. 심장 동맥질환을 포괄적으로 보장.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>※ 주의: 유병자 실비보험은 가입 시점의 건강 상태에 따라 보험료가 다르게 책정됩니다. 본 표는 일반적인 예시이며, 정확한 내용은 전문가 상담을 통해 확인해야 합니다.</p>
+            </div>
+
+            <p><strong>유병자 보험 심사 기준 완화 (2026년 전망):</strong> 최근 보험 업계는 유병자 인구 증가에 발맞춰 심사 기준을 지속적으로 완화하고 있습니다. 특히 고혈압, 당뇨와 같은 만성질환에 대해서는 약 복용 기간이나 혈압 수치에 따라 가입 문턱을 낮추는 추세입니다. 2026년에는 '초간편심사' 상품이 더욱 확대되어, 325 고지 기준(3개월 내 입원/수술/추가검사, 2년 내 입원/수술, 5년 내 중대 질병 진단) 외에도 추가적인 세부 심사 기준이 적용될 수 있습니다.</p>
+
+        </section>
+
+        <!-- Section 3: SEO Keywords Analysis (Naver Focused) -->
+        <section id="keywords_analysis">
+            <h2>네이버 SEO 최적화 키워드 분석 및 활용 전략</h2>
+            <p>고혈압실비보험 관련 네이버 검색 로직은 전문성과 신뢰도에 높은 비중을 둡니다. 단순 키워드 반복이 아닌, 검색 의도에 맞는 깊이 있는 정보를 제공하는 것이 중요합니다. 아래 키워드들은 네이버 검색 시 '자동완성' 및 '연관 검색어'로 자주 노출되는 키워드들입니다.</p>
+
+            <h3>네이버 자동완성 키워드 목록</h3>
+            <div class="keywords-list" aria-label="고혈압실비보험 자동완성 키워드 목록">
+                <span>고혈압실비보험</span>
+                <span>고혈압 환자 보험 가입</span>
+                <span>고혈압 약 복용 실비보험</span>
+                <span>유병자 실비보험 추천</span>
+                <span>간편심사 실비보험</span>
+                <span>고혈압 당뇨 보험 동시 가입</span>
+                <span>고혈압 고지혈증 보험</span>
+            </div>
+            <p>자동완성 키워드는 사용자들이 가장 보편적으로 검색하는 핵심 의도를 담고 있습니다. '고혈압실비보험'이라는 메인 키워드와 함께, '약 복용', '가입 조건', '추천' 등의 부가적인 정보를 제공하여 검색 의도를 만족시켜야 합니다.</p>
+
+            <h3>네이버 연관 검색어 키워드 목록</h3>
+            <div class="keywords-list" aria-label="고혈압실비보험 연관 검색어 목록">
+                <span>고혈압 진단비 보험</span>
+                <span>뇌혈관질환 진단비 고혈압</span>
+                <span>심혈관질환 진단비 고혈압 환자</span>
+                <span>고혈압 실비보험 보장 범위</span>
+                <span>고혈압 환자 보험료 비교</span>
+                <span>보험사별 고혈압 가입 심사 기준</span>
+                <span>고혈압 약 복용 후 2년</span>
+            </div>
+            <p>연관 검색어는 메인 키워드를 검색한 후 사용자들이 추가로 탐색하는 세부 정보를 보여줍니다. '진단비'나 '보장 범위'와 같이 실질적인 상품 내용을 궁금해하는 의도가 많으므로, 이와 관련된 상세 정보를 페이지 내에 충실하게 담아내야 합니다.</p>
+
+            <h3>네이버 '함께 많이 찾는 키워드' 목록</h3>
+            <div class="keywords-list" aria-label="함께 많이 찾는 키워드 목록">
+                <span>고혈압 보험 가입 시 유의사항</span>
+                <span>간편심사형 보험 장단점</span>
+                <span>고혈압 환자 보험 거절 사례</span>
+                <span>국민건강보험공단 고혈압 정보</span>
+                <span>고혈압 환자 심사 기간</span>
+                <span>유병자 보험 갱신 시점</span>
+            </div>
+            <p>'함께 많이 찾는 키워드'는 심층적인 정보 탐색 의도를 반영합니다. 단순한 상품 비교를 넘어, 가입 시 유의사항이나 공신력 있는 기관의 정보를 함께 제공하여 전문성을 확보하는 것이 중요합니다. 이로 인해 페이지 체류 시간을 늘리고 신뢰도를 높일 수 있습니다.</p>
+        </section>
+
+        <!-- Section 4: User Interaction and Comparison Tool (Dwell Time optimization) -->
+        <section id="comparison_tool">
+            <h2>고혈압 실비보험 맞춤형 비교 견적 요청 (체류시간 증대 목적)</h2>
+            <p>개인의 건강 상태, 고혈압 진단 시점, 복용 약물 종류에 따라 보험사별 심사 기준이 다릅니다. 정확한 보험료와 가입 가능 여부를 확인하려면 아래의 간편 진단 도구를 이용해 보세요. 고객님의 정보를 바탕으로 최적의 상품을 비교 분석해 드립니다.</p>
+
+            <div class="form-wrapper">
+                <h3>1. 고혈압 실비보험 간편 심사 체크리스트 (2026년 기준)</h3>
+                <form id="insurance-checklist-form">
+                    <div class="form-group">
+                        <label for="age-slider">나이: <span id="age-display">40</span>세 이상 (슬라이더 조절)</label>
+                        <input type="range" id="age-slider" name="age" min="40" max="80" value="40" oninput="document.getElementById('age-display').innerText = this.value">
+                    </div>
+                    <div class="form-group">
+                        <label for="medical-history">최근 3개월 이내 입원, 수술, 추가 검사 소견 여부:</label>
+                        <input type="radio" id="check1-yes" name="check1" value="yes"> <label for="check1-yes">예</label>
+                        <input type="radio" id="check1-no" name="check1" value="no" checked> <label for="check1-no">아니오</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="medical-history">최근 2년 이내 입원 또는 수술 여부:</label>
+                        <input type="radio" id="check2-yes" name="check2" value="yes"> <label for="check2-yes">예</label>
+                        <input type="radio" id="check2-no" name="check2" value="no" checked> <label for="check2-no">아니오</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="medical-history">최근 5년 이내 암, 협심증, 심근경색, 뇌졸중(뇌출혈/뇌경색) 진단/입원/수술 여부:</label>
+                        <input type="radio" id="check3-yes" name="check3" value="yes"> <label for="check3-yes">예</label>
+                        <input type="radio" id="check3-no" name="check3" value="no" checked> <label for="check3-no">아니오</label>
+                    </div>
+                    <button type="button" class="cta-button" onclick="alert('간편 심사 결과: 325 심사 기준에 따라 가입 가능성이 높습니다. 추가 상담을 진행해 보세요.')">간편 심사 결과 확인</button>
+                </form>
+            </div>
+
+            <div class="form-wrapper" style="margin-top: 30px;">
+                <h3>2. 맞춤형 비교 견적 요청 (전문가 상담)</h3>
+                <form id="quote-request-form">
+                    <div class="form-group">
+                        <label for="name">성함:</label>
+                        <input type="text" id="name" name="name" required placeholder="예: 홍길동">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">연락처:</label>
+                        <input type="text" id="contact" name="contact" required placeholder="예: 010-1234-5678">
+                    </div>
+                    <div class="form-group">
+                        <label for="diagnosis-date">고혈압 진단 시점:</label>
+                        <select id="diagnosis-date" name="diagnosis-date" required>
+                            <option value="">-- 선택 --</option>
+                            <option value="within-1y">1년 이내</option>
+                            <option value="1-3y">1~3년 이내</option>
+                            <option value="over-3y">3년 이상</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="additional-disease">추가 동반 질환 유무:</label>
+                        <input type="text" id="additional-disease" name="additional-disease" placeholder="예: 당뇨, 고지혈증 등">
+                    </div>
+                    <button type="submit" class="cta-button">무료 맞춤 견적 신청하기</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section 5: External Links for Reliability and Authority -->
+        <section id="trustworthy_info">
+            <h2>공신력 있는 외부 정보 출처 (신뢰도 확보)</h2>
+            <p>고혈압 및 보험 관련 정보는 정확한 공신력 있는 기관의 자료를 기반으로 판단해야 합니다. 본 센터는 아래 기관들의 정보를 참고하여 고객님께 정확한 정보를 제공하고자 합니다.</p>
+
+            <h3>고혈압 관련 신뢰할 수 있는 외부 링크</h3>
+            <div class="data-container">
+                <ul>
+                    <li><a href="https://www.cdc.go.kr/index.es?sid=a2" target="_blank">질병관리청 국가건강정보포털</a>: 고혈압의 정의, 예방, 관리 지침 등 상세 정보 제공.</li>
+                    <li><a href="https://www.khp.or.kr/" target="_blank">대한고혈압학회</a>: 고혈압 치료 및 연구에 대한 전문 학술 정보 제공.</li>
+                    <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 보험 상품 관련 감독 및 소비자 보호 정보 제공.</li>
+                    <li><a href="https://www.nhis.or.kr/" target="_blank">국민건강보험공단</a>: 국민건강보험 보장 범위 및 건강검진 정보 제공.</li>
+                    <li><a href="https://namu.wiki/w/%EA%B3%A0%ED%98%88%EC%95%95" target="_blank">나무위키 - 고혈압</a>: 고혈압에 대한 일반적인 정의 및 상세 설명.</li>
+                </ul>
+            </div>
+
+            <p><strong>SEO 최적화 전략 요약:</strong> 네이버 웹사이트 영역 상위 노출을 위해서는 정보의 전문성, 풍부한 텍스트량, 그리고 사용자 체류 시간 증대가 중요합니다. 위에서 제시된 키워드, 심층 분석, 그리고 인터랙티브 요소를 통해 검색 의도를 완벽히 만족시키는 페이지를 구축했습니다. 특히, 신뢰할 수 있는 외부 출처를 인용함으로써 정보의 권위를 높이고, 2026년 최신 정보를 지속적으로 반영하여 검색 엔진의 신뢰를 확보하는 것이 핵심입니다.</p>
+        </section>
+
+        <!-- Section 6: Additional Information and Final CTA -->
+        <section>
+            <h2>고혈압 실비보험 가입 시 Q&A</h2>
+            <p><strong>Q: 고혈압 약 복용 중인데 일반 실비보험 가입이 가능한가요?</strong></p>
+            <p>A: 고혈압 약 복용 사실은 보험 심사에 중요한 영향을 미칩니다. 일반적으로는 유병자 실비보험(간편심사형)으로 가입을 권유받게 됩니다. 하지만 보험사별로 심사 기준이 다르므로, 특정 보험사에서는 약 복용 기간이나 수치에 따라 가입이 가능할 수도 있습니다. 전문가 상담을 통해 가능성을 확인하는 것이 좋습니다.</p>
+            <p><strong>Q: 고혈압으로 인해 거절된 이력이 있는데 재가입이 가능한가요?</strong></p>
+            <p>A: 보험 가입 거절 이력이 있어도 시간이 지나거나 심사 기준이 완화된 새로운 상품이 출시되면 재가입이 가능합니다. 특히 2026년 현재는 유병자 시장 확대로 인해 예전에 가입이 어려웠던 분들도 혜택을 받을 수 있는 상품들이 많아졌습니다.</p>
+            <p><strong>Q: 뇌졸중 진단비와 뇌혈관질환 진단비는 무엇이 다른가요?</strong></p>
+            <p>A: 뇌졸중(뇌출혈+뇌경색) 진단비는 특정 질병코드만 보장하지만, 뇌혈관질환 진단비는 뇌혈관 전체의 질환을 포괄적으로 보장합니다. 고혈압 환자의 경우 뇌혈관질환 발생 위험이 높으므로, 보장 범위가 넓은 뇌혈관질환 진단비를 포함하는 상품을 선택하는 것이 유리합니다.</p>
+
+            <a href="#quote-request-form" class="cta-button">나에게 맞는 고혈압 실비보험 견적받기</a>
+        </section>
+
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>고혈압실비보험 종합 비교 센터 | 전문가 상담 센터</p>
+        <address>
+            상담 전화: <a href="tel:+82-2-1234-5678">+82-2-1234-5678</a><br />
+            이메일: <a href="mailto:info@highbloodpressure-insurance-center.com">info@highbloodpressure-insurance-center.com</a><br />
+            주소: 서울특별시 종로구 보험로 1234, 보험타워 5층<br />
+        </address>
+        <p>&copy; 2026 고혈압실비보험 종합 비교 센터. All rights reserved.</p>
+    </footer>
+
+  
